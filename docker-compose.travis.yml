@@ -1,0 +1,39 @@
+version: '2'
+services:
+    db:
+        image: postgres:11.1-alpine
+        environment:
+          - POSTGRES_DB=tripy
+          - POSTGRES_USER=admin
+          - POSTGRES_PASSWORD=password
+        ports:
+          - "5432:5432"
+    php:
+        build: ./php-fpm
+        expose:
+            - "9001"
+        volumes:
+            - ./symfony:/var/www/symfony
+            - ./logs/symfony:/var/www/symfony/var/log
+        links:
+            - db
+    nginx:
+        build: ./nginx
+        ports:
+            - "80:80"
+        links:
+            - php
+        volumes_from:
+            - php
+        volumes:
+            - ./logs/nginx/:/var/log/nginx
+    elk:
+        image: willdurand/elk
+        ports:
+            - "81:80"
+        volumes:
+            - ./elk/logstash:/etc/logstash
+            - ./elk/logstash/patterns:/opt/logstash/patterns
+        volumes_from:
+            - php
+            - nginx
