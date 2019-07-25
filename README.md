@@ -1,7 +1,4 @@
-Tripy docker configuration
-==============
-
-NOTE: fork from https://github.com/eko/docker-symfony.git
+# Tripy docker configuration
 
 This is a complete stack for running Symfony 4 (latest version: Flex) into Docker containers using docker-compose tool.
 
@@ -13,7 +10,7 @@ First, clone this repository:
 $ git clone ...
 ```
 
-Next, put your Symfony application (for Tripy project it will `Tripy`) into the parent folder.
+Next, put your Symfony application (for Tripy project it will be `Tripy`) into the parent folder.
 
 Make sure to change the host in the file .env, in the DATABASE_URL to `db`
 
@@ -37,10 +34,10 @@ $ docker-compose build
 
 Here are the `docker-compose` built images:
 
-* `db`: This is the PGSQL database container (can be changed to postgresql or whatever in `docker-compose.yml` file),
-* `php`: This is the PHP-FPM container including the application volume mounted on,
-* `nginx`: This is the Nginx webserver container in which php volumes are mounted too,
-* `elk`: This is a ELK stack container which uses Logstash to collect logs, send them into Elasticsearch and visualize them with Kibana.
+- `db`: This is the PGSQL database container (can be changed to postgresql or whatever in `docker-compose.yml` file),
+- `php`: This is the PHP-FPM container including the application volume mounted on,
+- `nginx`: This is the Nginx webserver container in which php volumes are mounted too,
+- `elk`: This is a ELK stack container which uses Logstash to collect logs, send them into Elasticsearch and visualize them with Kibana.
 
 This results in the following running containers:
 
@@ -58,8 +55,8 @@ dockersymfony_php_1     php-fpm7 -F                      Up      0.0.0.0:9000->9
 
 You can access Nginx and Symfony application logs in the following directories on your host machine:
 
-* `logs/nginx`
-* `logs/symfony`
+- `logs/nginx`
+- `logs/symfony`
 
 # Use Kibana!
 
